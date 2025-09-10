@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Question Form</title>
+  </head>
+  <body class="bg-gray-50">
+    <div class="flex flex-col min-h-screen w-screen">
+      <header
+        class="flex flex-row justify-between items-center top-0 left-0 m-4 p-5 flex-grow-0"
+      >
+        <div class="flex justify-start items-center">
+          <svg
+            class="w-9 h-9 md:w-12 md:h-12 text-blue-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+          <h1
+            class="font-lexend text-2xl md:text-4xl font-bold ml-1 md:ml-4 text-gray-800"
+          >
+            Create Question
+          </h1>
+        </div>
+        <a
+          class="font-lexend font-light text-white bg-gray-400 hover:bg-gray-500 transition-colors rounded-2xl px-4 py-3 cursor-pointer"
+          >Go Back</a
+        >
+      </header>
+      <main class="flex-grow flex items-center justify-center p-8">
+        <div
+          class="bg-white w-full max-w-3xl mx-auto p-6 md:p-10 rounded-2xl shadow-lg"
+        >
+          <form action="#" method="POST" class="space-y-8">
+            <div>
+              <label
+                for="question"
+                class="block text-lg font-medium text-gray-700 mb-3"
+                >Question</label
+              >
+              <textarea
+                id="question"
+                name="question"
+                rows="4"
+                placeholder="Enter the question text here..."
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
+              ></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  for="option-a"
+                  class="block text-md font-medium text-gray-600 mb-2"
+                  >Option A</label
+                >
+                <input
+                  type="text"
+                  id="option-a"
+                  name="option-a"
+                  placeholder="First option"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  for="option-b"
+                  class="block text-md font-medium text-gray-600 mb-2"
+                  >Option B</label
+                >
+                <input
+                  type="text"
+                  id="option-b"
+                  name="option-b"
+                  placeholder="Second option"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  for="option-c"
+                  class="block text-md font-medium text-gray-600 mb-2"
+                  >Option C</label
+                >
+                <input
+                  type="text"
+                  id="option-c"
+                  name="option-c"
+                  placeholder="Third option"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  for="option-d"
+                  class="block text-md font-medium text-gray-600 mb-2"
+                  >Option D</label
+                >
+                <input
+                  type="text"
+                  id="option-d"
+                  name="option-d"
+                  placeholder="Fourth option"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="correct-option"
+                class="block text-lg font-medium text-gray-700 mb-3"
+                >Correct Option</label
+              >
+              <select
+                id="correct-option"
+                name="correct-option"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
+              >
+                <option value="" disabled selected>
+                  Select the correct option
+                </option>
+                <option value="1">Option A</option>
+                <option value="2">Option B</option>
+                <option value="3">Option C</option>
+                <option value="4">Option D</option>
+              </select>
+            </div>
+            <div class="text-center pt-6">
+              <button
+                type="submit"
+                class="w-full md:w-auto font-lexend font-bold text-white bg-blue-500 hover:bg-blue-600 transition-transform transform hover:scale-105 rounded-2xl px-8 py-3 text-lg"
+              >
+                Save Question
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

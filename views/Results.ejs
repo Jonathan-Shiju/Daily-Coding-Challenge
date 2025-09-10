@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/output.css" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="flex flex-col h-screen w-screen">
+      <!-- Header -->
+      <div
+        class="flex flex-row justify-between items-end top-0 left-0 m-4 p-5 flex-grow-0"
+      >
+        <div class="flex justify-start items-start">
+          <img class="w-9 md:w-12" src="/static/stats.png" alt="logo Results" />
+          <p class="font-lexend text-2xl md:text-4xl font-bold ml-1 md:ml-4">
+            Results
+          </p>
+        </div>
+        <a
+          class="font-lexend font-light text-white bg-blue-500 rounded-2xl px-4 py-3"
+          href="/results"
+        >
+          Go Next
+        </a>
+      </div>
+
+      <!-- Content -->
+      <div
+        class="flex flex-col md:flex-row justify-around md:justify-between items-center flex-grow"
+      >
+        <!-- Correct / Wrong -->
+        <div
+          class="flex flex-col justify-center items-center w-4/5 md:w-1/2 font-encode-sans-semi-condensed"
+        >
+          <% if (user_answer === question.correct_option) { %>
+          <div
+            class="text-3xl font-bold md:text-5xl 2xl:text-7xl tracking-tighter"
+          >
+            <!-- Correct SVG -->
+            <svg
+              width="128"
+              height="128"
+              viewBox="0 0 128 128"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="64" cy="64" r="64" fill="#4ade80"></circle>
+              <path
+                d="M40 65 L55 80 L90 45"
+                stroke="white"
+                stroke-width="8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <div
+              class="mt-3 text-lg md:text-3xl w-2/4 font-bold text-center 2xl:text-4xl tracking-tighter"
+            >
+              Correct
+            </div>
+          </div>
+          <% } else { %>
+          <div
+            class="text-3xl font-bold md:text-5xl 2xl:text-7xl tracking-tighter"
+          >
+            <!-- Wrong SVG -->
+            <svg
+              width="128"
+              height="128"
+              viewBox="0 0 128 128"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="64" cy="64" r="64" fill="#ef4444"></circle>
+              <line
+                x1="45"
+                y1="45"
+                x2="83"
+                y2="83"
+                stroke="white"
+                stroke-width="8"
+                stroke-linecap="round"
+              />
+              <line
+                x1="83"
+                y1="45"
+                x2="45"
+                y2="83"
+                stroke="white"
+                stroke-width="8"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div
+              class="mt-3 text-lg md:text-3xl w-2/4 font-bold text-center 2xl:text-4xl tracking-tighter"
+            >
+              Wrong
+            </div>
+          </div>
+          <% } %>
+        </div>
+
+        <!-- Question + Options -->
+        <div
+          class="p-5 h-full w-full flex flex-col justify-center items-center"
+        >
+          <p
+            class="font-kiwi-maru font-bold text-xl md:text-2xl 2xl:text-3xl text-justify"
+          >
+            <%= question.sql_question %>
+          </p>
+
+          <div
+            class="flex flex-col justify-around h-3/4 w-full md:text-xl 2xl:text-2xl font-extralight font-lexendgiga mx-8 px-4"
+          >
+            <div
+              class="p-3 <%= question.correct_option === 'option1' ? 'border-4 border-green-500' : (user_answer === 'option1' ? 'border-4 border-red-500' : '') %>"
+            >
+              A. <%= question.option1 %>
+            </div>
+            <div
+              class="p-3 <%= question.correct_option === 'option2' ? 'border-4 border-green-500' : (user_answer === 'option2' ? 'border-4 border-red-500' : '') %>"
+            >
+              B. <%= question.option2 %>
+            </div>
+            <div
+              class="p-3 <%= question.correct_option === 'option3' ? 'border-4 border-green-500' : (user_answer === 'option3' ? 'border-4 border-red-500' : '') %>"
+            >
+              C. <%= question.option3 %>
+            </div>
+            <div
+              class="p-3 <%= question.correct_option === 'option4' ? 'border-4 border-green-500' : (user_answer === 'option4' ? 'border-4 border-red-500' : '') %>"
+            >
+              D. <%= question.option4 %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+  </body>
+</html>

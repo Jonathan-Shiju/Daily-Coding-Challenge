@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div class="flex flex-col h-screen w-screen">
+      <div
+        class="flex flex-row justify-between items-end top-0 left-0 m-4 p-5 flex-grow-0"
+      >
+        <div class="flex justify-start items-start">
+          <img
+            class="w-9 md:w-12"
+            src="../pubilc/static/stats.png"
+            alt="logo Results"
+          />
+          <p class="font-lexend text-2xl md:text-4xl font-bold ml-1 md:ml-4">
+            Results
+          </p>
+        </div>
+        <a
+          class="font-lexend font-light text-white bg-blue-500 rounded-2xl px-4 py-3"
+          href="Results.html"
+        >
+          Go Next
+        </a>
+      </div>
+      <div
+        class="flex flex-col md:flex-row justify-around md:justify-between items-center flex-grow"
+      >
+        <div
+          class="flex flex-col justify-center items-center w-4/5 md:w-1/2 font-encode-sans-semi-condensed"
+        >
+          <div
+            class="text-3xl font-bold md:text-5xl 2xl:text-7xl tracking-tighter"
+          >
+            <svg
+              width="128"
+              height="128"
+              viewBox="0 0 128 128"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <rect width="128" height="128" fill="url(#pattern0_5_17)" />
+              <defs>
+                <pattern
+                  id="pattern0_5_17"
+                  patternContentUnits="objectBoundingBox"
+                  width="1"
+                  height="1"
+                >
+                  <use xlink:href="#image0_5_17" transform="scale(0.0078125)" />
+                </pattern>
+                <image
+                  id="image0_5_17"
+                  width="128"
+                  height="128"
+                  preserveAspectRatio="none"
+                  xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAABIjgR3AAAU+UlEQVR4Ae1dC3RU1bn+z5kzM8lkJgkJiCIFFCT1Yil5ALoauAUbwRQVLFK9ElC77Krv5dV7bzWgozbAAm8pt9bgvavVkqpUu6z09nIhkeIFqiKPQCBqEAQSIEDe78ecmXP//2ROmMz7cV6TzF5rZp+zz97/v/f//fvfz7MPA8PQzd5uT+3nHFMZAbIEhskCASYDA+kMQCoW10a+gD5e0z25dgzrwLB2vB7wBWjFNKcYQagRGKgx8cYT+wvt9HxYOSx3fLvpO59N4VhLPgjCfAGEWVigLCzRNQqVqh6VpIYB5nNgmL/xru59VQte7VKIlypk404Bpr1nN5nT+HyUznysofPQn4k/oyrS8mXiwKADDCqD4BJ297Vx+6qX2ft9o+k3JG4UIKei+GYUY5EgMPdipjP0KFK0Ds0MI2zFvJUdLij5TI959M6TrhUge1fxROChiGXYIjTvU70zr+d7bCZOuARXGXBQVnlryVm95lWXCpBdXpzHAPs8gLAYBafLPEYAKBoG5kMBXGsqbys5GEE6VaLqSrg5O1bPAdZVjAJboErpVWci7AQXW3J44St7VWcdgKEuFCC7/IVbGcb1Ig7X5gTI5/AKZmCvILAvVd728i6tC6apAkzfbh9v5PiNaCOXai0ILfij8P/k4Lmnqwrt57TgTzw1UYDv77ZzHQ7+KQTejnmwUkZGsOtEEOw2I7fp43l2Xm05qK4AuRXF+TiUK8WC3qR2YXXO7zgOIR85VFCyT818qqYA97x3j+FketYryPDnWEDV+KopTBl4CWgV101prVn9/rL3nTLQC0lCFSCorec4/l3MDc3gJVxoCezjee4+NfoGiitAXvmqQhfAFixzZuhyJ2J4SKCJBVhx8LZfbPcIk/0SeSjkBGByy1etQ/D/ihwS4Ecu5kySHckQh8eKVVRFCIsLNun877HM90Ze7kQKPxLY2tfKrVRioUl2BZi22241ORwf4Fx4gZ+CJIKilACuhVT0G413V8+zd0ZJwm8yWRUge/tzYxjOQG1Wnl9uicBYJXBQ4J2FlYVrG2IlJKWXTQFyK+wTQHBWxNuqnSSIePFplREYQ8GhAnutHHmWRQGo5rMcty8BvhyQhKYhLjXzfL4cliDmUQC1+WT2E+CHBk6uGCRrkjnJPlaaMSkA9fapw4eZSLT5sSIRefo8kj1hEHnSKymiVwAcm5pxqJfo7V8RptpXJHvCIJZ5AkO0mc79Hk5QAPws2vSJdLJJ4KZx38xNqi/b81E0FKPqBLqnd2mGL6r00WQ0kSaoBAQ05YuimTaOGED3ws4RzE5iejcoJqo/bMIFpBmRLiBF1AegJV33ql4CfNXxDckwk7AhjELG9IgQkQLQej6mTSzpeghQZ5f5bozCzlbYTYB7J88epBx2mrBzkYgopwTwdUhhbrg7i8KyALSHz72NKwG+nFApQwvfZ2VKCbNwyIelALSBE4kl9vCFI1F9xLnJjVnI3ISs0e5e/5dIKeZpx5C5GeYRUo3JkGW7BjJNVjjZeQlOdzWAU8BtH8q4ThwV3BhqVBDSTLj37SfAjwGk3FGT4N++fQdMtl41hEq/i4ft9Udh44kd0Mn3Dnkmw42VsEM69wSjFdQCiG/sgCuqGaZgTEfKMxPLwTNZt8OPxs/EnnNgUV/ua4eXq/8MnzadlF00ArA/CPYGUtA+gPi6luxZGhkECfxfzrgflo6fFRR8ksZV5lTYlF0EPxg7TXbhhMIwoAKIL2qOlHf1ZBY7gb8Rwb8lc0rYlA0MC2u+s0x+JUAMRSwD5CSgAgy8pRsgVSI4oATMrBF+NWM53BwB+BIxxZRAfONa4jLU99swDbyfzxwYGjVxF0oCBP7G7PthdsbkUFGDPqeRwfPH3oOPLlUHjRfJQ9xEMtPf+QR+LcDA4QyRkE/EFWt+9vKYwSdJKmEJAmHqYwHoWBbGyZzGfPg8S8DsXwJJhgGzPzPjev8RogwlS/DM0Xdgb0NNlBSGJBMEg3Cd93E1vhYAz+TBZAnwh8gu8A2Bv2lGEcgNPnEkS7D6xsWQZrQEzkD4Txg6b8k7uo8C0IFM3pES9/4lQOD/Bw7f8jKu8x9BhtBMsxWeuF6eE3P8YTtEAegotsTu3vBQSzaYRPBzRykHvpSTJRNyoEuG4ygJW/dxexJpGKIAGJqo/YOiCXxB4NPEjRrgS7mYlHwVnG/uxgNRpZDofMHFrPBMOagAtL2YDmH0fJi49pXAlZo/yfehgiHTR10LHb081KESuGLRAgZ+7LmVfFAB6PhV7Pnp8gROBeUaEWkL1vxfZ6+AHFzcUdu19HeLLLv7eKht7AanKzpTQBi7j9oV6Q0qAN7NV7tQ8cRPBD9nBWSPmqhJtquazw/y7XU44WxjFzicUS8lD2J9RQEGDl4eZJK4uCIBC2eG13JWwox0bcBv7++BmrZLVzKEV/28S1SCPvQjdh5YiwpAR64jETp1O+G8JCCCj2b/u+kTvJ6od/v8oW3gcDl9GPJOAZuDLujp933mE3lowEw35gOjAPG8fe2OXB+aNR3dEfi/wZqvJfj/V38C3jzxaUCpUF+grqkburBvEIEzujHHs6zJ4ccWIkgsW1Sa6aItUvSbgrtlmvq7oKajHr5oPw8teK2lS3Gb/elp39IsGyfQ7D+4tywkfxoVnMPRwbj0ZLAlh/nphAHMd4oKgBME9KUNVR2B/uK0JSL43oxpq1TpqV3wh7Of4JAnijbOm2CE9wQ+1fzvaAg+tfkLd/4aLvd0hJV7Ghmeb+mBq9EipKeEfmGYMCfCYh8Awc8Ki4tMkX5y3T9C2eyf+QWfWNCGiqduWABvzfqpuFtGJrZhkbFySfB6zgOagv9V68WIwPcs2MW2Xmjq6PMM8nstYc7QB5YcHN/mN5YCgU/cUAAPTJobNuW67mb46cHfAu2bU9oNgL8SpqWNV5pVQPoE/u3lr4Vd8wMRGoVWYGxaUqDHYriR59JY+rpW0FgyPowUfGL9LUsGvJH3EIwx00e+lHM2qvm5D2gK/pdizY8dfJJSS1c/XMAmIdh0EWHP0qfVlBPrFcrRgC+lnmDJFJVgtEJKMAh+6rUSS9X9L1rr4fadr0FDb3htfjgZbO9xBF0/IOxZ8bt64VCLIU4s4EtsJ1pGw3/mPiS+VCGFyeFL4P/DMANfkk0nrh/UNnX5nTom7Fm0EbFtYJM4BfDlAF8iPTEFlQCbgwx8s0YOR2/qlOY+CFqCX91yQaz5jb2ynv84RDw0UVSLcwW89/oBYs/i3p/0IbFlvCmamB9Rhy8c1pNSxmBz8CAqAU1eRu9E8LG3f2PquOiJxJhSDfClLPbR+kGD1/oBYs/icED6fKoUVxb/OgTq0Sm3ykLLm8j1KVfBZmwOolUCAn8z1vxvawj+cXfNb+pTb8KLFo9ICUgZyBH2NA+gSPf6BZzkofG8Uo7esyMQR0VoCSTwaSJKK3cMV/aow6cm+FJZqRmg5sC9fmBTxALQkE2NKdTJ1rGiEqSHuWmSNleS0mgNfmH5b6BZxZovgS/5tH5AHUPcYHI1i+NE2S1Alk29dnUKKQH2CULtnNUD+LSmrzX4khLQ1PGF5u6x1ATI3geYhL11Nd0N1qvFmh1ICchCUMdxqu1qNbM1hNfR5nMI/mua1vwhGcIbmiQS1wK8H8R6f7G3NVYSEacncEtxJo/aeE83AP5DQEqilSPwf4hmv6VvYFuXVvnw5ssy+L4QBso+yf5Ve703L1XuqW2nNl5SAuog0jQyNRNauSNNWPN36g98koeBZVzUCZRv7tEt5fM9LUA/LRwpAa3midPHqAxagl/ZVCfW/Fb3hk4t5BGMJ8syDuoEym4BcK0ZXv7iz/hPrYz6jiZ3tt7yGB7Jol3NJ/AXlb8OegWfUEEL0EdNgOwWgIgfbD4NH5w7SJeaOHpbVyt3uKlW1zVfkgvLQq8iFkBisKHmf+R6s1UiqXv/UGOtWPPbcCev3p2BYTppMUixLjvtZP2XqndhX6MsrzfrXZ5wsPEsLKp4HeIBfBImjgLaaDHolJKSFZXg6Fb4e+MJJdloTpvAv6OiFGgPf/w4pg43hAiKV0/a5Pns0XcVOQZND8I+EJfgkwWAE7ghBBRXAAKJlOCfj7wNnylwFp6WSvB5wxm4A3v78VXzBySGSwLHWBNvVM02kxI8jUqwv1nRVkc1fSDw70Sz3+GQ/ZRPVcrgdPCHcB4IIKd81QX0VFsflQ5UmiXzmTqqSM3NZD+Cf1ccg0+zgB1FmzhxLQCna1RpBiSA+lwOtAR/EOcKpLB48j+7fBpr/utxW/NJ1klGQxMOAOhbQ7QzhPmcfDVdr9MBTx0pg0MtZ9RkGzOvTy9/A3d9VAqdjr6YaWlJwMyxlcRfVABgmL9pkRlRCSrL4HCcKAGBv7hic9yDT1ibTNwfyRcVgHd178NrBwWo7Xqc/fAkKsGR1rNqs46I3ycS+Hx813wqNGdgBWsSf0UBqha8SjsTNTsalpTgicNb4GhrbUSgqBX575dOwRKq+cMAfJJZsoltcGPusSFEgN1qCdQfn25Ugscrt0BVW52/x5qF7SPwPxo+4JMgTQbD4IEDA32AAfFq0g/wRLYba9jjh38Px3SiBAT+3Qh+F9/vmc24v7YYDW9LhRhUgL42bh8OB5ulB1r5XagEj6ESHG87p1UWRL57L50cluCbONbJ9SVtk4Q7qADVy+z9+L25rdIDLX1JCarxpBAt3N6LBP4bw67mkyxRAb4krCW5DiqAOyD0eSRSSoV9+ojSY4feEo+LUZjVEPJ7Ln4Nd+96A7qHmdmXCskZmFLpmnxxKtgzILd8dQ1u5VLtzABP3v6uaYNnKe7xU+M1Lprbp927wxV8s4Htayn6VZKnnL0tAJ3JoxsrQBltd/TAI4ffEr+z55lxua/PdDYNa/BJXinJ3F+95eajAHhuGCmANrs5vXPnvicleBiPibmg0E5j6nPc8pf1w7bmkxjR9EOalfu5t4h9FGDgixLMh94Rtb4nJVi+fzPI/dJJD65J3Izgt8fpkm64uKQmGb+oXrjO58OEPgpABAVwrQmXsJrx2hzdcP9npagEbbKwpbZ+1rZ18E1Hoyz09EoEXwACS5LpSX/58+kESpFyyot3YB9xgXSvJ5/e+Hl79iMwNikt6mwR+DP/sg7OdDRFTSNeElqTjecu//jf/Z546dcCiAVzsSV6LSCdIrp8fylcitISEPh529aOCPAJwxQT91wgLANaAEqQU7FqD7YHcwIl1jo8w2iFLXjg5DXJ4VsCCfyznZpPeqoivmSToaXpnzYG/A5EYAuA2RME9iVVchklk2ZHJ6z4fDOc7QrPjNOJHLlY80cK+CRWs5EL2p8LagGIQG75qvdxTLiUrvXqOMYARePnwqNZ8+hlB59s0juK75w6AI9/shV3Jzt9ng/XgBQzV9dw3y8nBCtfyEN8HDz3NMfxC5GINRghLZ/xghN+V7sbtp4+APmjp0L+2CkwNX0s1GIHj1b0ttVWAZ28PZIcbvoU8OTwHzaEKLRvdfGTAK3AM2gFXvXzSFdBAydmdwMdjjjSXabNvKXuRxtWhpJD0D6AlNhm5Dbh9XHpXq8+Wf9rR1nAmhTSsOm1CLLkC8vfNjkj5SfhEAtLAT6eZ+dxqfgRJKirKWJ/BRzpSoCmHzIs5uWEmT/5eIeFpQCU6FBBCW0YWedNQI/3I1kJMlJMH35151qfRZ9AOIWtAERgSmvNavRoB7Hu3UhUghSzsWmW80xEI7awOoGeaE/fbh+Po4IjGJbpGa7X65HSMaRef6bNlHNmyQbCJmwXkQUgqlWF9nOYaAVe6r4/QPkdKZbAlmR6JVLwST4G+ovUXSjb8/W4ornJmC4/0rRaxCclsCUZoY93ih9c1CIPSvLMsJr+9/w9rz4cDY+Im4BBJgIwuFbwDt7fOxim84vh2ByMspiOIvjZ9KJnNOKPuAkYZIIM+1q5lTjNWjEYpvOL4dYcpFmMZ9PBOita8Amu6C2AG+xpu+1Ws4Pfjbd57iDde8PBEmCT1piebLi+5q71MR3zF70FcMNcPc/eKfDOQnzFXLWTRmLVsHi3BLjI05mRbp4eK/gkx5gVgIhUFq5tAMZQkFACkoayDg926BltteR8uXCNLAcyx9wEeBY3e/tzYxjOsB3DEs2Bp2Bkusa3erpHpxinn1yy4ZRMJGPvA3hnhPoEJofjA7QGBd7P9HofD30Ci5m7bDUYvntm2YaLcspRlibAM0PUJ+hvNS7CsK2e4Xq+1nufAD8DW5We5pggN/iEiaxNwBCQcZ4gt2LVWhyc/quifIYwje1Gb5aAVvZG28x/PL14/X2xDPWCSUU5BXBzzStfVegC2IK3ibWDYEh4PTMbDTyC//DXd657y+uRrLeKKwDl1r2A9C5exsXUsdaWwJbEXRqTavne8cJfyNbZC6Q1Ua0FBCIWKPzS2x+3598xdktz0mgjahwpgSqKFyg/ocK1Wjsgvukpph1zmNq8jxdvDm+rc6jChHiuOhC5FcX5giC+o35TiLxp/lhNS4Dj+66UZOMTdXevf1PNgss+CgiVedpZlGrkslHznsW4naHia/lcjdEBju1dY2ymN6ePS0tXG3ySreoWwBNQ6hsYOX4jjhSWeobr7VoJS0A9fFzJO5KRYlhy5PZ1Z7Qqs6YKIBU6u/yFWxnG9SIuaM6RwvTmy6UEZFXSkk3nRlnNj1YXlvy31uXUhQJIQsjZsXoOsK5iNEy6fCs5ViXARZz6tGTuyZOL1/9JKrPWvq4UQBJGdnlxHn7T8nncdbYYw3SVx0iVgEy9xcR9g239qrqlG2gorCunK+F6SyZ7V/FE4KGIZdgiPR1cFUoJ6P3EFLOhI8nMfWgzm15SYzzvLbtw73WtAJ6FyKkovhnvi3AIeS9mOuDrzp5plLz2pwS4YOOwmA17bCZjSfWiNbRJRvcubhRAkuS09+wmcxpPk0nzsXGYh/5M/Bml52r6qASO+taeJrTyx2xm43/RCZyehzCqmZdoecWdAngXdPrOZ1M41pKPhxnMx2ZiFhYoC+Nc4x1Ppvt6HLLWiB/YwG8s0DH70qnbMtFXnUzcK4A/ic3ebk/t5xxTGQGyBIbJwuHlZLQW6VjYVIxvIx+BtOE13ZNrx7AODKPvKA/49EFN/KYifVaPvqxGH9faX2iX/TvLIncN//4fPMI39ym5VwwAAAAASUVORK5CYII="
+                />
+              </defs>
+            </svg>
+          </div>
+          <div
+            class="mt-3 text-lg md:text-3xl w-2/4 font-bold text-center 2xl:text-4xl tracking-tighter"
+          >
+            Correct
+          </div>
+        </div>
+        <div
+          class="p-5 h-full w-full flex flex-col justify-center items-center md:flex md:flex-col md:justify-center md:items-center"
+        >
+          <p
+            class="font-kiwi-maru font-bold text-xl md:text-2xl 2xl:text-3xl text-justify"
+          >
+            Which of these SQL constructs can create a deadlock risk if not used
+            carefully in multi-transaction workloads?
+          </p>
+          <div
+            class="flex flex-col justify-around h-3/4 w-full md:text-xl 2xl:text-2xl font-extralight font-lexendgiga mx-8 px-4"
+          >
+            <div>A. Single consistent SELECT with no locks</div>
+            <div class="border-4 border-[#00FF04] p-3">
+              B. Updating two rows in different order in different transactions
+            </div>
+            <div>C. Using only read-only transactions</div>
+            <div>D. Using ORDER BY in SELECTs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

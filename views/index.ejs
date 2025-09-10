@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/output.css" />
+    <title>DCC</title>
+  </head>
+  <body>
+    <div
+      class="h-screen bg-[url('/static/background-image-6.jpg')] bg-cover flex items-center justify-center"
+    >
+      <div
+        class="bg-gray-400/10 backdrop-blur-md h-screen w-screen flex flex-col"
+      >
+        <div class="flex justify-between items-center m-8">
+          <div class="font-inter text-white font-extralight px-2 py-2">
+            Team 3
+          </div>
+          <% if (user) { %>
+          <nav
+            class="hidden md:flex md:justify-center md:items-center md:bg-[#A09A9A]/20 md:rounded-xl"
+          >
+            <% if (user.role === 'faculty') { %>
+            <a
+              class="font-kantumruy text-white font-extralight md:mx-3 md:px-2 md:py-1"
+              href="/create-form"
+            >
+              Create Form
+            </a>
+            <a
+              class="font-kantumruy text-white font-extralight md:mx-3 md:px-2 md:py-1"
+              href="/dashboard"
+            >
+              Check Results
+            </a>
+            <% } else { %>
+            <a
+              class="font-kantumruy text-white font-extralight md:mx-3 md:px-2 md:py-1"
+              href="/welcome-page"
+            >
+              Today's Challenge
+            </a>
+            <a
+              class="font-kantumruy text-white font-extralight md:mx-3 md:px-2 md:py-1"
+              href="/dashboard"
+            >
+              Past Challenges
+            </a>
+            <% } %>
+          </nav>
+          <% } %> <% if (user) { %>
+          <a
+            class="font-kiwi-maru text-white font-extralight bg-[#A09A9A]/20 rounded-2xl px-4 py-3"
+            href="/logout"
+          >
+            Logout
+          </a>
+          <% } else { %>
+          <a
+            class="font-kiwi-maru text-white font-extralight bg-[#A09A9A]/20 rounded-2xl px-4 py-3"
+            href="/signup-form"
+          >
+            Signup
+          </a>
+          <% } %>
+        </div>
+        <% if (user) { %>
+        <nav
+          class="md:hidden flex flex-col justify-evenly items-start ml-5 p-4 bg-[#A09A9A]/20 rounded-2xl grow-0 max-w-fit"
+        >
+          <% if (user.role === 'faculty') { %>
+          <a
+            class="font-kantumruy text-white font-extralight p-3"
+            href="/create-form"
+          >
+            Create Form
+          </a>
+          <a
+            class="font-kantumruy text-white font-extralight p-3"
+            href="/results-faculty"
+          >
+            Check Results
+          </a>
+          <% } else { %>
+          <a
+            class="font-kantumruy text-white font-extralight p-3"
+            href="/welcome-page"
+          >
+            Today's Challenge
+          </a>
+          <a
+            class="font-kantumruy text-white font-extralight p-3"
+            href="/dashboard"
+          >
+            Past Challenges
+          </a>
+          <% } %>
+        </nav>
+        <% } %>
+        <div
+          class="flex flex-col md:flex-row m-4 md:m-6 flex-grow justify-between"
+        >
+          <div class="flex flex-col justify-between items-start">
+            <div>
+              <div
+                class="font-joan text-white md:text-8xl text-6xl pt-8 pl-3 md:pl-5 md:ml-3"
+              >
+                <p>Daily</p>
+                <p>Coding</p>
+                <p>Challenge.</p>
+              </div>
+              <div
+                class="font-k2d text-white font-extralight text-lg pl-4 mt-1 pt-2 md:text-2xl md:ml-4 md:mt-5"
+              >
+                Home-grown Coding Platform
+              </div>
+            </div>
+            <div class="hidden md:flex md:flex-row md:flex-wrap ml-2">
+              <div>
+                <p class="font-kiwi-maru text-white text-md p-4">
+                  Jonathan Shiju
+                </p>
+                <p class="font-kiwi-maru text-white text-md p-4">Lorem Ipsum</p>
+              </div>
+              <div>
+                <p class="font-kiwi-maru text-white text-md p-4">Lorem Ipsum</p>
+                <p class="font-kiwi-maru text-white text-md p-4">Lorem Ipsum</p>
+              </div>
+            </div>
+          </div>
+          <div class="md:hidden mt-6 ml-3 flex flex-row justify-between">
+            <div>
+              <p class="font-kiwi-maru text-white text-xs p-1">
+                Jonathan Shiju
+              </p>
+              <p class="font-kiwi-maru text-white text-xs p-1">Lorem Ipsum</p>
+              <p class="font-kiwi-maru text-white text-xs p-1">Lorem Ipsum</p>
+              <p class="font-kiwi-maru text-white text-xs p-1">Lorem Ipsum</p>
+            </div>
+            <div class="md:hidden block text-white text-4xl font-kosugi">
+              <p>Code</p>
+              <p>Learn</p>
+              <p>Repeat</p>
+            </div>
+          </div>
+          <div
+            class="hidden md:block md:text-white md:text-8xl md:font-kosugi md:self-end"
+          >
+            <p>Code</p>
+            <p>Learn</p>
+            <p>Repeat</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+  </body>
+</html>

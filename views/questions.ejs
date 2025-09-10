@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/output.css" />
+    <title>Question</title>
+  </head>
+  <body>
+    <div
+      class="bg-[#000E25] h-screen w-screen bg-cover flex flex-row justify-center items-center"
+    >
+      <div
+        class="fixed top-0 left-0 font-lexendgiga text-white md:text-5xl lg:text-6xl 2xl:text-7xl m-4 p-5 pt-10"
+      >
+        SQL
+      </div>
+      <div
+        class="bg-[#4E4B7A] h-1/2 w-3/4 rounded-2xl md:h-1/2 md:w-2/3 lg:h-2/3 lg:w-2/3 flex flex-col justify-center items-center"
+      >
+        <div class="flex flex-col justify-between items-center h-3/4 w-4/5">
+          <p
+            class="font-kiwi-maru font-bold text-white text-2xl md:text-2xl 2xl:text-3xl"
+          >
+            <%= question.sql_question %>
+          </p>
+          <form
+            method="POST"
+            action="/questions"
+            class="flex flex-col justify-around h-3/4 w-full md:text-xl 2xl:text-2xl font-extralight font-lexendgiga text-white"
+          >
+            <label
+              class="p-3 cursor-pointer border rounded mb-2 peer-checked:border-green-500"
+            >
+              <input
+                type="radio"
+                name="answer"
+                value="option1"
+                class="hidden peer"
+                required
+              />
+              A. <%= question.option1 %>
+            </label>
+            <label
+              class="p-3 cursor-pointer border rounded mb-2 peer-checked:border-green-500"
+            >
+              <input
+                type="radio"
+                name="answer"
+                value="option2"
+                class="hidden peer"
+              />
+              B. <%= question.option2 %>
+            </label>
+            <label
+              class="p-3 cursor-pointer border rounded mb-2 peer-checked:border-green-500"
+            >
+              <input
+                type="radio"
+                name="answer"
+                value="option3"
+                class="hidden peer"
+              />
+              C. <%= question.option3 %>
+            </label>
+            <label
+              class="p-3 cursor-pointer border rounded mb-2 peer-checked:border-green-500"
+            >
+              <input
+                type="radio"
+                name="answer"
+                value="option4"
+                class="hidden peer"
+              />
+              D. <%= question.option4 %>
+            </label>
+            <button
+              type="submit"
+              class="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+  </body>
+</html>
