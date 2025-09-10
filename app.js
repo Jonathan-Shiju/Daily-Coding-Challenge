@@ -15,8 +15,6 @@ config({ path: envFile })
 
 const app = express()
 const PORT = process.env.PORT
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 const mongoUri = process.env.MONGO_URI
 
 mongoose
