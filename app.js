@@ -227,7 +227,7 @@ app.post('/sign-up', async (req, res) => {
     }
     const user = new User(userData)
     await user.save()
-    res.redirect('/log-in')
+    res.redirect('/login-form')
   } catch (err) {
     res.status(400).send('Error signing up')
   }
