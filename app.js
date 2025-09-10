@@ -294,7 +294,7 @@ app.get('/results', async (req, res) => {
     }
   }
 
-  res.render('results', { user, question, user_answer })
+  res.render('Results', { user, question, user_answer })
 })
 app.get('/results-faculty', async (req, res) => {
   const dateParam = req.query.date
