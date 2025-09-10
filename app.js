@@ -251,12 +251,8 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard', { alert, user: req.user })
 })
 app.get('/results', async (req, res) => {
-  console.log('--- GET /results debugging ---')
-  console.log('req.user:', req.user)
   const user = req.user || null
-  console.log('user object:', user)
   const dateParam = req.query.date
-  console.log('dateParam:', dateParam)
   const date = dateParam ? new Date(dateParam) : new Date()
   date.setHours(0, 0, 0, 0)
   const tomorrow = new Date(date)
@@ -264,25 +260,18 @@ app.get('/results', async (req, res) => {
   const question = await Question.findOne({
     date: { $gte: date, $lt: tomorrow }
   })
-  console.log('question:', question)
-  console.log('Querying App for user:', user.name, 'on date:', date)
+  if (!question) {
+    return res.redirect('/dashboard?alert=noQuestion')
+  }
   const record = await App.findOne({
     name: user.name,
     date_of_the_question: { $gte: date, $lt: tomorrow }
   })
-  console.log('App.findOne criteria:', {
-    name: user.name,
-    date_of_the_question: date
-  })
-  console.log('Record found:', record)
-  const user_answer = record ? record.question_answer_option : null
-  console.log('Derived user_answer:', user_answer)
-  console.log('correct_option:', question?.correct_option)
+  if (!record) {
+    return res.redirect('/dashboard?alert=notDone')
+  }
 
-  // Log user answer and correct option
-  console.log(
-    `User answer: ${user_answer}, Correct option: ${question?.correct_option}`
-  )
+  const user_answer = record ? record.question_answer_option : null
 
   // Date range validation
   if (dateParam) {
@@ -305,7 +294,7 @@ app.get('/results', async (req, res) => {
     }
   }
 
-  res.render('Results', { user, question, user_answer })
+  res.render('results', { user, question, user_answer })
 })
 app.get('/results-faculty', async (req, res) => {
   const dateParam = req.query.date
@@ -313,6 +302,12 @@ app.get('/results-faculty', async (req, res) => {
   date.setHours(0, 0, 0, 0)
   const tomorrow = new Date(date)
   tomorrow.setDate(date.getDate() + 1)
+  const question = await Question.findOne({
+    date: { $gte: date, $lt: tomorrow }
+  })
+  if (!question) {
+    return res.redirect('/dashboard?alert=noQuestion')
+  }
   // fetch all student users
   const allStudents = await User.find({ role: 'student' })
   // fetch responses for date
@@ -426,7 +421,17 @@ app.post('/questions', async (req, res) => {
   })
   res.redirect('/dashboard')
 })
-app.get('/welcome-page', (req, res) => {
+app.get('/welcome-page', async (req, res) => {
+  // ensure a question exists for today
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const tomorrow = new Date(today)
+  tomorrow.setDate(today.getDate() + 1)
+  const q = await Question.findOne({ date: { $gte: today, $lt: tomorrow } })
+  if (!q) {
+    // no question for today, redirect to dashboard with error
+    return res.redirect('/dashboard?alert=noQuestion')
+  }
   const user = req.user || null
   res.render('welcome-page', { user })
 })
