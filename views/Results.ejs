@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/output.css" />
     <title>Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <div class="flex flex-col h-screen w-screen">
@@ -119,27 +118,30 @@
             <div
               class="p-3 <%= question.correct_option === 'option1' ? 'border-4 border-green-500' : (user_answer === 'option1' ? 'border-4 border-red-500' : '') %>"
             >
-              A. <%= question.option1 %>
+              A.
+              <%= question.option1 %>
             </div>
             <div
               class="p-3 <%= question.correct_option === 'option2' ? 'border-4 border-green-500' : (user_answer === 'option2' ? 'border-4 border-red-500' : '') %>"
             >
-              B. <%= question.option2 %>
+              B.
+              <%= question.option2 %>
             </div>
             <div
               class="p-3 <%= question.correct_option === 'option3' ? 'border-4 border-green-500' : (user_answer === 'option3' ? 'border-4 border-red-500' : '') %>"
             >
-              C. <%= question.option3 %>
+              C.
+              <%= question.option3 %>
             </div>
             <div
               class="p-3 <%= question.correct_option === 'option4' ? 'border-4 border-green-500' : (user_answer === 'option4' ? 'border-4 border-red-500' : '') %>"
             >
-              D. <%= question.option4 %>
+              D.
+              <%= question.option4 %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
   </body>
 </html>

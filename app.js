@@ -126,7 +126,7 @@ const studentSchema = new mongoose.Schema({
   // The student's registration number.
   reg_no: {
     type: String,
-    required: true
+    required: false
   },
   // The class of the student.
   class: {
@@ -264,6 +264,11 @@ app.get('/results', async (req, res) => {
     date_of_the_question: date
   })
   const user_answer = record ? record.question_answer_option : null
+
+  // Log user answer and correct option
+  console.log(
+    `User answer: ${user_answer}, Correct option: ${question?.correct_option}`
+  )
 
   // Date range validation
   if (dateParam) {
