@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
   // The user's full name.
   name: {
     type: String,
-    required: true
+    required: false
   },
   // The user's role, restricted to either 'student' or 'faculty'.
   role: {
@@ -218,15 +218,14 @@ app.post('/sign-up', async (req, res) => {
     return res.status(400).send('Invalid email domain')
   }
   try {
-    const info = await Student.findOne({ official_mail: mail })
-    if (!info) return res.status(400).send('Student info not found')
-    const user = new User({
-      mail,
-      password,
-      name: info.name,
-      role,
-      reg_no: info.reg_no
-    })
+    let userData = { mail, password, role }
+    if (role === 'student') {
+      const info = await Student.findOne({ official_mail: mail })
+      if (!info) return res.status(400).send('Student info not found')
+      userData.name = info.name
+      userData.reg_no = info.reg_no
+    }
+    const user = new User(userData)
     await user.save()
     res.redirect('/log-in')
   } catch (err) {
