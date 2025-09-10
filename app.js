@@ -268,7 +268,7 @@ app.get('/results', async (req, res) => {
   console.log('Querying App for user:', user.name, 'on date:', date)
   const record = await App.findOne({
     name: user.name,
-    date_of_the_question: date
+    date_of_the_question: { $gte: date, $lt: tomorrow }
   })
   console.log('App.findOne criteria:', {
     name: user.name,
