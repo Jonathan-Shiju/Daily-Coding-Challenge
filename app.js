@@ -247,11 +247,16 @@ app.get('/', (req, res) => {
 })
 app.get('/dashboard', (req, res) => {
   const alert = req.query.alert || null
+  console.log('Dashboard accessed by:', req.user?.mail)
   res.render('dashboard', { alert, user: req.user })
 })
 app.get('/results', async (req, res) => {
+  console.log('--- GET /results debugging ---')
+  console.log('req.user:', req.user)
   const user = req.user || null
+  console.log('user object:', user)
   const dateParam = req.query.date
+  console.log('dateParam:', dateParam)
   const date = dateParam ? new Date(dateParam) : new Date()
   date.setHours(0, 0, 0, 0)
   const tomorrow = new Date(date)
@@ -259,11 +264,20 @@ app.get('/results', async (req, res) => {
   const question = await Question.findOne({
     date: { $gte: date, $lt: tomorrow }
   })
+  console.log('question:', question)
+  console.log('Querying App for user:', user.name, 'on date:', date)
   const record = await App.findOne({
     name: user.name,
     date_of_the_question: date
   })
+  console.log('App.findOne criteria:', {
+    name: user.name,
+    date_of_the_question: date
+  })
+  console.log('Record found:', record)
   const user_answer = record ? record.question_answer_option : null
+  console.log('Derived user_answer:', user_answer)
+  console.log('correct_option:', question?.correct_option)
 
   // Log user answer and correct option
   console.log(
