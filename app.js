@@ -1,11 +1,17 @@
 import express from 'express'
-import mongoose from 'mongoose'
+import mongoose from 'mongoose' // Mongoose is still needed for models
 import path from 'path'
 import { config } from 'dotenv'
-import { fileURLToPath } from 'url'
 import session from 'express-session'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
+import { fileURLToPath } from 'url'
+
+// Import the new connection function
+import { connectToDatabase } from './config/db'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const envFile =
   process.env.NODE_ENV === 'production' || process.argv.includes('--prod')
@@ -15,136 +21,48 @@ config({ path: envFile })
 
 const app = express()
 const PORT = process.env.PORT
-const mongoUri = process.env.MONGO_URI
 
-mongoose
-  .connect(mongoUri)
-  .then(() => console.log('Successfully connected to MongoDB.'))
-  .catch((err) => console.error('Connection error', err))
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-// Define the schema for the User database
+// Models need to be defined here because Mongoose models are tied to a connection
+// and you'll get a 'MissingSchemaError' if you try to use them before the connection is established.
 const userSchema = new mongoose.Schema({
-  // The official email for login, unique
-  mail: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  // The user's password. It's highly recommended to hash this before saving.
-  password: {
-    type: String,
-    required: true
-  },
-  // The user's full name.
-  name: {
-    type: String,
-    required: false
-  },
-  // The user's role, restricted to either 'student' or 'faculty'.
-  role: {
-    type: String,
-    enum: ['student', 'faculty'],
-    required: true
-  },
-  // The student's registration number.
-  reg_no: {
-    type: String,
-    required: false
-  }
+  mail: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  name: { type: String, required: false },
+  role: { type: String, enum: ['student', 'faculty'], required: true },
+  reg_no: { type: String, required: false }
 })
 
-// Define the schema for the Questions database
 const questionSchema = new mongoose.Schema({
-  // The SQL question text.
-  sql_question: {
-    type: String,
-    required: true
-  },
-  // Four options for the question.
-  option1: {
-    type: String,
-    required: true
-  },
-  option2: {
-    type: String,
-    required: true
-  },
-  option3: {
-    type: String,
-    required: true
-  },
-  option4: {
-    type: String,
-    required: true
-  },
-  // The date the question was added. Defaults to the current date.
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  // The correct option for the question.
-  correct_option: {
-    type: String,
-    required: true
-  }
+  sql_question: { type: String, required: true },
+  option1: { type: String, required: true },
+  option2: { type: String, required: true },
+  option3: { type: String, required: true },
+  option4: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+  correct_option: { type: String, required: true }
 })
 
-// rename studentSchema to appSchema
 const appSchema = new mongoose.Schema({
-  // The name of the student who answered the question.
-  name: {
-    type: String,
-    required: true
-  },
-  // The option the student selected as their answer.
-  question_answer_option: {
-    type: String,
-    required: true
-  },
-  // The date the question was answered.
-  date_of_the_question: {
-    type: Date,
-    required: true
-  }
+  name: { type: String, required: true },
+  question_answer_option: { type: String, required: true },
+  date_of_the_question: { type: Date, required: true }
 })
 
-// new studentSchema for personal info
 const studentSchema = new mongoose.Schema({
-  // The name of the student.
-  name: {
-    type: String,
-    required: true
-  },
-  // The official email of the student.
-  official_mail: {
-    type: String,
-    required: true
-  },
-  // The student's registration number.
-  reg_no: {
-    type: String,
-    required: false
-  },
-  // The class of the student.
-  class: {
-    type: String,
-    required: true
-  },
-  // The department of the student.
-  department: {
-    type: String,
-    required: true
-  }
+  name: { type: String, required: true },
+  official_mail: { type: String, required: true },
+  reg_no: { type: String, required: false },
+  class: { type: String, required: true },
+  department: { type: String, required: true }
 })
 
-// Create Mongoose models from the schemas.
 const User = mongoose.model('User', userSchema)
 const Question = mongoose.model('Question', questionSchema)
 const App = mongoose.model('App', appSchema)
 const Student = mongoose.model('Student', studentSchema)
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -157,7 +75,7 @@ app.use(
     secret: 'mynameisjonathanshiju',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }
   })
 )
 app.use(passport.initialize())
@@ -240,7 +158,6 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  // Replace with actual user session logic if available
   const user = req.user || null
   res.render('index', { user })
 })
@@ -249,6 +166,8 @@ app.get('/dashboard', (req, res) => {
   console.log('Dashboard accessed by:', req.user?.mail)
   res.render('dashboard', { alert, user: req.user })
 })
+
+// All routes will now automatically use the existing connection
 app.get('/results', async (req, res) => {
   const user = req.user || null
   const dateParam = req.query.date
@@ -272,7 +191,6 @@ app.get('/results', async (req, res) => {
 
   const user_answer = record ? record.question_answer_option : null
 
-  // Date range validation
   if (dateParam) {
     const qDate = new Date(dateParam)
     qDate.setHours(0, 0, 0, 0)
@@ -307,13 +225,10 @@ app.get('/results-faculty', async (req, res) => {
   if (!question) {
     return res.redirect('/dashboard?alert=noQuestion')
   }
-  // fetch all student users
   const allStudents = await User.find({ role: 'student' })
-  // fetch responses for date
   const responses = await App.find({
     date_of_the_question: { $gte: date, $lt: tomorrow }
   })
-  // build lists
   const attempted = []
   const unattempted = []
   allStudents.forEach((u) => {
@@ -321,7 +236,6 @@ app.get('/results-faculty', async (req, res) => {
     if (responses.some((r) => r.name === u.name)) attempted.push(entry)
     else unattempted.push(entry)
   })
-  // populate dropdowns from personal info for all students
   const infos = await Student.find({})
   const classes = [...new Set(infos.map((s) => s.class))]
   const departments = [...new Set(infos.map((s) => s.department))]
@@ -336,12 +250,10 @@ app.get('/results-faculty', async (req, res) => {
   })
 })
 
-// Handle filtered results via POST
 app.post('/results-faculty', async (req, res) => {
   const dateParam = req.query.date
   const classFilter = req.body.classFilter
   const deptFilter = req.body.deptFilter
-  // reuse date filtering logic from GET
   const date = dateParam ? new Date(dateParam) : new Date()
   date.setHours(0, 0, 0, 0)
   const tomorrow = new Date(date)
@@ -368,7 +280,6 @@ app.post('/results-faculty', async (req, res) => {
     if (responses.some((r) => r.name === u.name)) attempted.push(entry)
     else unattempted.push(entry)
   })
-  // apply dropdown filters
   const filtAtt = attempted.filter(
     (e) =>
       (!classFilter || e.class === classFilter) &&
@@ -421,14 +332,12 @@ app.post('/questions', async (req, res) => {
   res.redirect('/dashboard')
 })
 app.get('/welcome-page', async (req, res) => {
-  // ensure a question exists for today
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const tomorrow = new Date(today)
   tomorrow.setDate(today.getDate() + 1)
   const q = await Question.findOne({ date: { $gte: today, $lt: tomorrow } })
   if (!q) {
-    // no question for today, redirect to dashboard with error
     return res.redirect('/dashboard?alert=noQuestion')
   }
   const user = req.user || null
@@ -440,7 +349,6 @@ app.get('/questions', async (req, res) => {
     today.setHours(0, 0, 0, 0)
     const tomorrow = new Date(today)
     tomorrow.setDate(today.getDate() + 1)
-    // Find question where date is today
     const question = await Question.findOne({
       date: { $gte: today, $lt: tomorrow }
     })
@@ -450,8 +358,17 @@ app.get('/questions', async (req, res) => {
   }
 })
 
-// read launch URL from env or default to localhost
+// The server now starts only after the database connection is successfully established.
 const launchUrl = process.env.LAUNCH_URL || `http://localhost:${PORT}`
-app.listen(PORT, () => {
-  console.log(`Server is running on ${launchUrl}`)
-})
+
+;(async () => {
+  try {
+    await connectToDatabase()
+    app.listen(PORT, () => {
+      console.log(`Server is running on ${launchUrl}`)
+    })
+  } catch (err) {
+    console.error('Failed to start server:', err)
+    process.exit(1)
+  }
+})()

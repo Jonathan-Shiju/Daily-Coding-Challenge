@@ -61,7 +61,7 @@ const questionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // The date the question was added. Defaults to the current date.
+  // The date the question was added.
   date: {
     type: Date,
     default: Date.now
@@ -73,7 +73,7 @@ const questionSchema = new mongoose.Schema({
   }
 })
 
-// rename studentSchema to appSchema
+// Schema for student answers
 const appSchema = new mongoose.Schema({
   // The name of the student who answered the question.
   name: {
@@ -92,7 +92,7 @@ const appSchema = new mongoose.Schema({
   }
 })
 
-// new studentSchema for personal info
+// Schema for personal info
 const studentSchema = new mongoose.Schema({
   // The name of the student.
   name: {
@@ -127,9 +127,44 @@ const Question = mongoose.model('Question', questionSchema)
 const App = mongoose.model('App', appSchema)
 const Student = mongoose.model('Student', studentSchema)
 
-const generateRandomStudents = (count) => {
+// Hardcoded questions for consistency
+const sampleQuestions = [
+  {
+    sql_question:
+      'What is the correct syntax to create a table named "employees"?',
+    option1: 'CREATE TABLE employees (id INT, name VARCHAR(100));',
+    option2: 'MAKE TABLE employees (id INT, name VARCHAR(100));',
+    option3: 'CREATE DATABASE employees;',
+    option4: 'INSERT INTO employees (id, name);',
+    correct_option: 'option1'
+  },
+  {
+    sql_question:
+      'Which SQL statement is used to extract data from a database?',
+    option1: 'UPDATE',
+    option2: 'SELECT',
+    option3: 'GET',
+    option4: 'EXTRACT',
+    correct_option: 'option2'
+  },
+  {
+    sql_question: 'Which SQL keyword is used to sort the result-set?',
+    option1: 'SORT BY',
+    option2: 'ASCEND',
+    option3: 'ORDER BY',
+    option4: 'ARRANGE BY',
+    correct_option: 'option3'
+  }
+]
+
+// Generate student info and user accounts
+const generateData = (studentCount, facultyCount) => {
   const students = []
-  for (let i = 0; i < count; i++) {
+  const users = []
+  const answers = []
+
+  // Generate student data
+  for (let i = 0; i < studentCount; i++) {
     const firstName = faker.person.firstName()
     const lastName = faker.person.lastName()
     const name = `${firstName} ${lastName}`
@@ -145,22 +180,16 @@ const generateRandomStudents = (count) => {
       class: studentClass,
       department
     })
-  }
-  return students
-}
 
-const generateRandomUsers = (students, facultyCount) => {
-  const users = []
-  // Generate user accounts for the students
-  students.forEach((student) => {
+    // Create a corresponding user account for the student
     users.push({
-      mail: student.official_mail,
+      mail: official_mail,
       password: faker.internet.password(),
-      name: student.name,
+      name: name,
       role: 'student',
-      reg_no: student.reg_no
+      reg_no: reg_no
     })
-  })
+  }
 
   // Generate some faculty accounts
   for (let i = 0; i < facultyCount; i++) {
@@ -173,53 +202,25 @@ const generateRandomUsers = (students, facultyCount) => {
       role: 'faculty'
     })
   }
-  return users
+
+  // Generate answers for a subset of students and questions
+  const questionsToAnswer = sampleQuestions.slice(0, 3) // Use the first 3 questions for answers
+  const studentsWhoAnswered = students.slice(0, Math.floor(studentCount / 2)) // Half the students have answered
+  const options = ['option1', 'option2', 'option3', 'option4']
+
+  studentsWhoAnswered.forEach((student) => {
+    questionsToAnswer.forEach((question) => {
+      // Create a random answer for each student and question
+      answers.push({
+        name: student.name,
+        question_answer_option: options[faker.number.int({ min: 0, max: 3 })],
+        date_of_the_question: faker.date.recent({ days: 30 })
+      })
+    })
+  })
+
+  return { students, users, answers }
 }
-
-const sampleQuestions = [
-  {
-    sql_question:
-      'What is the correct syntax to create a table named "employees"?',
-    option1: 'CREATE TABLE employees (id INT, name VARCHAR(100));',
-    option2: 'MAKE TABLE employees (id INT, name VARCHAR(100));',
-    option3: 'CREATE DATABASE employees;',
-    option4: 'INSERT INTO employees (id, name);',
-    date: new Date(),
-    correct_option: 'option1'
-  },
-  {
-    sql_question:
-      'Which SQL statement is used to extract data from a database?',
-    option1: 'UPDATE',
-    option2: 'SELECT',
-    option3: 'GET',
-    option4: 'EXTRACT',
-    date: new Date(),
-    correct_option: 'option2'
-  },
-  {
-    sql_question: 'Which SQL keyword is used to sort the result-set?',
-    option1: 'SORT BY',
-    option2: 'ASCEND',
-    option3: 'ORDER BY',
-    option4: 'ARRANGE BY',
-    date: new Date(),
-    correct_option: 'option3'
-  }
-]
-
-const sampleApps = [
-  {
-    name: 'Jane Smith',
-    question_answer_option: 'option1',
-    date_of_the_question: new Date()
-  },
-  {
-    name: 'John Doe',
-    question_answer_option: 'option4',
-    date_of_the_question: new Date()
-  }
-]
 
 const importData = async () => {
   try {
@@ -234,15 +235,18 @@ const importData = async () => {
     console.log('Existing data cleared from all collections.')
 
     // Generate and import new data
-    const studentsToSeed = generateRandomStudents(100)
-    const usersToSeed = generateRandomUsers(studentsToSeed, 5) // 5 faculty members
+    const { students, users, answers } = generateData(100, 5) // 100 students, 5 faculty
 
-    await User.insertMany(usersToSeed)
-    await Student.insertMany(studentsToSeed)
+    await User.insertMany(users)
+    await Student.insertMany(students)
     await Question.insertMany(sampleQuestions)
-    await App.insertMany(sampleApps)
+    await App.insertMany(answers)
 
     console.log('Data imported successfully!')
+    console.log(`- Students seeded: ${students.length}`)
+    console.log(`- Users seeded (students & faculty): ${users.length}`)
+    console.log(`- Questions seeded: ${sampleQuestions.length}`)
+    console.log(`- App entries seeded (answers): ${answers.length}`)
   } catch (err) {
     console.error(`Error importing data: ${err}`)
     process.exit(1)
@@ -252,9 +256,27 @@ const importData = async () => {
   }
 }
 
-if (process.argv[2] === '-d') {
-  console.log('Deleting all data...')
-  // Add a function to delete all data if needed
-} else {
+// Check for command-line arguments to run the script
+if (process.argv[2] === '--seed') {
   importData()
+} else if (process.argv[2] === '--clear') {
+  mongoose
+    .connect(mongoURI)
+    .then(async () => {
+      console.log('MongoDB connected...')
+      await User.deleteMany({})
+      await Question.deleteMany({})
+      await App.deleteMany({})
+      await Student.deleteMany({})
+      console.log('Existing data cleared from all collections.')
+      mongoose.connection.close()
+      console.log('MongoDB connection closed.')
+    })
+    .catch((err) => {
+      console.error(`Error clearing data: ${err}`)
+    })
+} else {
+  console.log(
+    'Please specify an action: use "--seed" to import data or "--clear" to delete all data.'
+  )
 }
