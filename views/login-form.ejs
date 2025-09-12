@@ -76,5 +76,10 @@
         </div>
       </div>
     </section>
+    <% if (alert === 'loginError') { %>
+    <script>
+      alert('Incorrect email or password. Please try again.')
+    </script>
+    <% } %>
   </body>
 </html>

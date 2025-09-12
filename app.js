@@ -114,12 +114,13 @@ app.post(
   '/log-in',
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/log-in'
+    failureRedirect: '/login-form?alert=loginError'
   })
 )
 
 app.get('/login-form', (req, res) => {
-  res.render('login-form')
+  const alert = req.query.alert || null
+  res.render('login-form', { alert })
 })
 app.get('/signup-form', (req, res) => {
   res.render('signup-form')
