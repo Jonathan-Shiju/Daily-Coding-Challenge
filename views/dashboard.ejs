@@ -109,9 +109,14 @@
       alert('No question available for today.')
     </script>
     <% } %>
-    <% if (alert === 'noQuestion') { %>
+    <% if (alert === 'notDone') { %>
     <script>
       alert('Question of the Day not attempted.')
+    </script>
+    <% } %>
+    <% if (alert === 'alreadyAnswered') { %>
+    <script>
+      alert('Question is already Attempted.')
     </script>
     <% } %>
   </body>

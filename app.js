@@ -320,7 +320,7 @@ app.post('/create-form', async (req, res) => {
   res.redirect('/dashboard')
 })
 app.post('/questions', async (req, res) => {
-  if (!req.user) return res.redirect('/log-in')
+  if (!req.user) return res.redirect('/login-form')
   const answer = req.body.answer
   const today = new Date()
   today.setHours(0, 0, 0, 0)
@@ -341,6 +341,16 @@ app.get('/welcome-page', async (req, res) => {
     return res.redirect('/dashboard?alert=noQuestion')
   }
   const user = req.user || null
+  // check if already answered
+  if (user) {
+    const answered = await App.findOne({
+      name: user.name,
+      date_of_the_question: { $gte: today, $lt: tomorrow }
+    })
+    if (answered) {
+      return res.redirect('/dashboard?alert=alreadyAnswered')
+    }
+  }
   res.render('welcome-page', { user })
 })
 app.get('/questions', async (req, res) => {
