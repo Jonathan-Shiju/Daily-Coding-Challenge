@@ -8,7 +8,7 @@ import { Strategy as LocalStrategy } from 'passport-local'
 import { fileURLToPath } from 'url'
 
 // Import the new connection function
-import { connectToDatabase } from './config/db'
+import { connectToDatabase } from './config/db.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
