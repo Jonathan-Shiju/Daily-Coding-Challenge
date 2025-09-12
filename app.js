@@ -342,6 +342,7 @@ app.get('/welcome-page', async (req, res) => {
     return res.redirect('/dashboard?alert=noQuestion')
   }
   const user = req.user || null
+  console.log(user)
   // check if already answered
   if (user) {
     const answered = await App.findOne({
